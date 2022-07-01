@@ -1,6 +1,6 @@
 import React from "react";
 
-const PostCard = ({ post: any }) => {
+const PostCard = ({ post }: any) => {
   return (
     <div>
       {post.title}
