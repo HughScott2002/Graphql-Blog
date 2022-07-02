@@ -1,25 +1,20 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { PostCard, PostWidget, Categories } from "../components";
+import { getPost } from "../services";
 
-type Post = { title: string; excerpt: string }[];
-const posts: Post = [
-  { title: "React Testing", excerpt: "Learn React Testing" },
-  { title: "React with Tailwind", excerpt: "Learn React with Tailwind" },
-];
-
-const Home: NextPage = () => {
+const Home: NextPage = ({ posts }: any) => {
   return (
-    <div className="container mx-auto px-10 mb-8 bg-gray-50">
+    <div className="container mx-auto px-10 mb-8">
       <Head>
         <title>Graphql Blog</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
         <div className="lg:col-span-8 col-span-1">
-          {posts.map((post) => {
+          {posts.map((post: any) => {
             //add an Id
-            return <PostCard post={post} key={post.title} />;
+            return <PostCard post={post.node} key={post.node.author.id} />;
           })}
         </div>
       </div>
@@ -31,6 +26,14 @@ const Home: NextPage = () => {
       </div>
     </div>
   );
+};
+export const getStaticProps = async () => {
+  const posts = (await getPost()) || [];
+  return {
+    props: {
+      posts,
+    },
+  };
 };
 
 export default Home;
