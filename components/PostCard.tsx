@@ -1,10 +1,27 @@
-import React from "react";
+import React, { FC } from "react";
 import moment from "moment";
 import Link from "next/link";
 import { BsCalendar2Minus } from "react-icons/bs";
 
-const PostCard = ({ post }: any) => {
-  console.log(post);
+interface typePostCard {
+  post: {
+    author: {
+      bio: string;
+      id: string;
+      name: string;
+      photo: { url: string };
+    };
+    createdAt: string;
+    slug: string;
+    title: string;
+    excerpt: string;
+    featuredImage: { url: string };
+    category: { name: string; slug: string }[];
+  };
+}
+
+const PostCard: FC<typePostCard> = ({ post }) => {
+  // console.log(post);
   return (
     <div className="bg-white shadow-lg rounded-lg p-0 lg:p-8 pb-12 mb-8">
       <div className="flex justify-center relative overflow-hidden shadow-md pb-80 mb-6">
@@ -42,7 +59,7 @@ const PostCard = ({ post }: any) => {
         {post.excerpt}
       </p>
       <div className="text-center">
-        <Link href={`/post/${post.slug}`}>
+        <Link href={`/posts/${post.slug}`}>
           <span
             className="transition duration-500 transform hover:-translate-y-1 hover:bg-transparent hover:border-solid 
           hover:border-blue-500 hover:border-2 hover:text-black  inline-block bg-blue-500 text-white text-lg font-medium py-3 px-4 rounded-full cursor-pointer"
