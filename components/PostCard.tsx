@@ -21,7 +21,7 @@ interface typePostCard {
 }
 
 const PostCard: FC<typePostCard> = ({ post }) => {
-  // console.log(post);
+  console.log(post);
   return (
     <div className="bg-white shadow-lg rounded-lg p-0 lg:p-8 pb-12 mb-8">
       <div className="flex justify-center relative overflow-hidden shadow-md pb-80 mb-6">

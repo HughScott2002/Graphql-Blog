@@ -1,7 +1,8 @@
 import React from "react";
 import Head from "next/head";
 import type { NextPage } from "next";
-import { GetServerSideProps } from "next";
+import { GetStaticProps } from "next";
+import { getPostDetails } from "../../services";
 import {
   PostDetail,
   Categories,
@@ -11,7 +12,7 @@ import {
   CommentsForm,
 } from "../../components";
 
-const PostDetails: NextPage = () => {
+const PostDetails: NextPage = ({ post }: any) => {
   return (
     <div className="container mx-auto px-10 mb-8">
       <Head>
@@ -20,14 +21,19 @@ const PostDetails: NextPage = () => {
       </Head>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
         <div className="col-span-1 lg:col-span-8">
-          <PostDetail />
-          <Author />
-          <CommentsForm />
-          <Comments />
+          <PostDetail post={post} />
+          <Author author={post.author} />
+          <CommentsForm slug={post.slug} />
+          <Comments slug={post.slug} />
         </div>
         <div className="col-span-1 lg:col-span-4">
           <div className="relative lg:sticky top-8">
-            <PostWidget categories={undefined} slug={undefined} />
+            <PostWidget
+              categories={post.category.map(
+                (categories: any) => categories.slug
+              )}
+              slug={post.slug}
+            />
             <Categories />
           </div>
         </div>
@@ -36,13 +42,11 @@ const PostDetails: NextPage = () => {
   );
 };
 
-// export const getServerSideProps:GetServerSideProps = async (ctx) => {
-
-//     return {
-//         props:{
-//             data:null
-//         }
-//     }
-// }
+export async function GetStaticProps({ params: { slug: string } }) {
+  const data = await getPostDetails(params.slug);
+  return {
+    props: { post: data },
+  };
+}
 
 export default PostDetails;
