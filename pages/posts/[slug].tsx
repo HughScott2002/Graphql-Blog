@@ -1,7 +1,6 @@
 import React from "react";
 import Head from "next/head";
 import type { NextPage } from "next";
-import { GetStaticProps } from "next";
 import { getPostDetails } from "../../services";
 import {
   PostDetail,
@@ -42,7 +41,14 @@ const PostDetails: NextPage = ({ post }: any) => {
   );
 };
 
-export async function GetStaticProps({ params: { slug: string } }) {
+export const getStaticPaths = ({ params: { slug: string } }) => {
+  return {
+    paths: [params:{}],
+    fallback: false,
+  };
+};
+
+export async function getStaticProps({ params: { slug: string } }) {
   const data = await getPostDetails(params.slug);
   return {
     props: { post: data },

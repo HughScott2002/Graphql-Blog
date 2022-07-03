@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import moment from "moment";
 import Link from "next/link";
 import { BsCalendar2Minus } from "react-icons/bs";
-
+// import Image from "next/image";
 interface typePostCard {
   post: {
     author: {
@@ -30,6 +30,7 @@ const PostCard: FC<typePostCard> = ({ post }) => {
           alt={post.title}
           className="object-top absolute  lg:h-96 h-80 w-full object-cover shadow-lg rounded-t-lg lg:rounded-lg"
         />
+        {/* <Image src={post.featuredImage.url} alt={post.title}/> */}
       </div>
       <h1
         className="transition duration-500 text-center mb-8 cursor-pointer
