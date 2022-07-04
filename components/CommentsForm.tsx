@@ -7,7 +7,7 @@ interface typeCommentForm {
 /**
  *
  * @param slug:string
- * !This does not add a comment at the moment
+ * !This does not add a comment at the momment
  * @returns CommentsForm Components
  */
 const CommentsForm: FC<typeCommentForm> = ({ slug }) => {
