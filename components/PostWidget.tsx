@@ -10,6 +10,7 @@ interface typeProps {
 
 const PostWidget: FC<typeProps> = ({ categories, slug }) => {
   const [relatedPosts, setRelatedPosts] = useState([]);
+
   useEffect(() => {
     if (slug) {
       getSimilarPosts(categories, slug).then((result) =>
@@ -49,7 +50,7 @@ const PostWidget: FC<typeProps> = ({ categories, slug }) => {
                 <p className="text-grey-500 font-xs">
                   {moment(post.createdAt).format("MMM DD, YYYY")}
                 </p>
-                <Link href={`/post/${post.slug}`} key={post.title}>
+                <Link href={`/posts/${post.slug}`} key={post.title}>
                   {post.title}
                 </Link>
               </div>

@@ -13,6 +13,7 @@ import {
 
 const PostDetails: NextPage = ({ post }: any) => {
   // console.log(post);
+  // console.log(post.category.map((categories: any) => categories.slug));
   return (
     <div className="container mx-auto px-10 mb-8">
       <Head>
@@ -29,9 +30,9 @@ const PostDetails: NextPage = ({ post }: any) => {
         <div className="col-span-1 lg:col-span-4">
           <div className="relative lg:sticky top-8">
             <PostWidget
-              categories={post.category.map(
-                (categories: any) => categories.slug
-              )}
+              // categories={post.category.map(
+              //   (categories: any) => categories.slug
+              // )}
               slug={post.slug}
             />
             <Categories />
