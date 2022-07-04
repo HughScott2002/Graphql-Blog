@@ -4,7 +4,12 @@ import { submitComment } from "../services";
 interface typeCommentForm {
   slug: string;
 }
-
+/**
+ *
+ * @param slug:string
+ * !This does not add a comment at the moment
+ * @returns CommentsForm Components
+ */
 const CommentsForm: FC<typeCommentForm> = ({ slug }) => {
   const [error, setError] = useState(false);
   const [localStorage, setLocalStorage] = useState(null);
@@ -13,6 +18,11 @@ const CommentsForm: FC<typeCommentForm> = ({ slug }) => {
   const nameEl = useRef();
   const emailEl = useRef();
   const storeDateEl = useRef();
+
+  console.log(commentEl);
+  console.log(nameEl);
+  console.log(emailEl);
+  console.log(storeDateEl);
 
   useEffect(() => {
     nameEl.current.value = window.localStorage.setItem(
