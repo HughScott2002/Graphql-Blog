@@ -30,10 +30,10 @@ const PostDetails: NextPage = ({ post }: any) => {
         <div className="col-span-1 lg:col-span-4">
           <div className="relative lg:sticky top-8">
             <PostWidget
-              // categories={post.category.map(
-              //   (categories: any) => categories.slug
-              // )}
-              slug={post.slug}
+            // categories={post.category.map(
+            //   (categories: any) => categories.slug
+            // )}
+            // slug={post.slug}
             />
             <Categories />
           </div>

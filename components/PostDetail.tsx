@@ -2,8 +2,31 @@ import moment from "moment";
 import React, { FC } from "react";
 import { BsCalendar2Minus } from "react-icons/bs";
 
-const PostDetail: FC = ({ post }) => {
-  const getContentFragment = (index, text, obj, type) => {
+interface typePostDetail {
+  post: {
+    author: {
+      bio: string;
+      id: string;
+      name: string;
+      photo: { url: string };
+    };
+    createdAt: string;
+    slug: string;
+    title: string;
+    excerpt: string;
+    featuredImage: { url: string };
+    category: { name: string; slug: string }[];
+    content: { raw: { children: [] } };
+  };
+}
+
+const PostDetail: FC<typePostDetail> = ({ post }) => {
+  const getContentFragment = (
+    index: string,
+    text: string,
+    obj: { bold: any; italic: any; underline: any },
+    type: string
+  ) => {
     let modifiedText = text;
 
     if (obj) {
