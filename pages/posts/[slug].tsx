@@ -10,6 +10,7 @@ import {
   Comments,
   CommentsForm,
 } from "../../components";
+import { AdjacentPosts } from "../../sections";
 
 const PostDetails: NextPage = ({ post }: any) => {
   // console.log(post);
@@ -24,14 +25,14 @@ const PostDetails: NextPage = ({ post }: any) => {
         <div className="col-span-1 lg:col-span-8">
           <PostDetail post={post} />
           <Author author={post.author} />
-          <AdjacentPost slug={post.slug} createdAt={post.createdAt} />
+          <AdjacentPosts slug={post.slug} createdAt={post.createdAt} />
           <CommentsForm slug={post.slug} />
           <Comments slug={post.slug} />
         </div>
         <div className="col-span-1 lg:col-span-4">
           <div className="relative lg:sticky top-8">
             <PostWidget
-              categories={post.category.map(
+              categories={post.categories.map(
                 (categories: any) => categories.slug
               )}
               slug={post.slug}
