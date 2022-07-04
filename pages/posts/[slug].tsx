@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import type { NextPage } from "next";
-import { getPostDetails } from "../../services";
+import { getPost, getPostDetails } from "../../services";
 import {
   PostDetail,
   Categories,
@@ -12,6 +12,7 @@ import {
 } from "../../components";
 
 const PostDetails: NextPage = ({ post }: any) => {
+  // console.log(post);
   return (
     <div className="container mx-auto px-10 mb-8">
       <Head>
@@ -41,18 +42,22 @@ const PostDetails: NextPage = ({ post }: any) => {
   );
 };
 
-export const getStaticPaths = ({ params: { slug: string } }) => {
+export default PostDetails;
+
+export const getStaticPaths = async () => {
+  const posts = await getPost();
+
   return {
-    paths: [params:{}],
+    paths: posts.map(({ node: { slug } }: any) => ({
+      params: { slug },
+    })),
     fallback: false,
   };
 };
 
-export async function getStaticProps({ params: { slug: string } }) {
+export async function getStaticProps({ params }: any) {
   const data = await getPostDetails(params.slug);
   return {
     props: { post: data },
   };
 }
-
-export default PostDetails;

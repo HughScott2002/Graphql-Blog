@@ -4,8 +4,8 @@ import Link from "next/link";
 import { getRecentPosts, getSimilarPosts } from "../services";
 
 interface typeProps {
-  categories: any;
-  slug: any;
+  categories: string[];
+  slug: string;
 }
 
 const PostWidget: FC<typeProps> = ({ categories, slug }) => {
