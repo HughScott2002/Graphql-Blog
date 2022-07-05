@@ -19,10 +19,10 @@ const CommentsForm: FC<typeCommentForm> = ({ slug }) => {
   const emailEl = useRef();
   const storeDateEl = useRef();
 
-  console.log(commentEl);
-  console.log(nameEl);
-  console.log(emailEl);
-  console.log(storeDateEl);
+  // console.log(commentEl);
+  // console.log(nameEl);
+  // console.log(emailEl);
+  // console.log(storeDateEl);
 
   useEffect(() => {
     nameEl.current.value = window.localStorage.setItem(
