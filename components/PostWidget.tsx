@@ -13,9 +13,13 @@ const PostWidget: FC<typeProps> = ({ categories, slug }) => {
 
   useEffect(() => {
     if (slug) {
-      getSimilarPosts(categories, slug).then((result) => {
-        setRelatedPosts(result);
-      });
+      try {
+        getSimilarPosts(categories, slug).then((result) => {
+          setRelatedPosts(result);
+        });
+      } catch (error) {
+        console.log(error);
+      }
     } else {
       getRecentPosts().then((result) => setRelatedPosts(result));
     }
@@ -29,14 +33,17 @@ const PostWidget: FC<typeProps> = ({ categories, slug }) => {
         {slug ? "Related Posts" : "Recent Posts"}
       </h3>
       {relatedPosts.map(
-        (post: {
-          title: string;
-          featuredImage: { url: string };
-          createdAt: string;
-          slug: string;
-        }) => {
+        (
+          post: {
+            title: string;
+            featuredImage: { url: string };
+            createdAt: string;
+            slug: string;
+          },
+          index: number
+        ) => {
           return (
-            <div key={post.title} className="flex items-center w-full mb-4">
+            <div key={index} className="flex items-center w-full mb-4">
               <div className="w-16 flex-none">
                 <img
                   src={post.featuredImage.url}
@@ -50,7 +57,7 @@ const PostWidget: FC<typeProps> = ({ categories, slug }) => {
                 <p className="text-grey-500 font-xs">
                   {moment(post.createdAt).format("MMM DD, YYYY")}
                 </p>
-                <Link href={`/posts/${post.slug}`} key={post.title}>
+                <Link href={`/posts/${post.slug}`} key={index}>
                   {post.title}
                 </Link>
               </div>

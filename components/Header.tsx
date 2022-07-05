@@ -1,14 +1,16 @@
-import React, { useContext, FC } from "react";
+import React, { useState, useEffect, FC } from "react";
 import Link from "next/link";
 import { GrGraphQl } from "react-icons/gr";
-
-type DEMO = { name: string; slug: string };
-const demoArry: DEMO[] = [
-  { name: "React", slug: "react" },
-  { name: "Web Development", slug: "wev-dev" },
-];
+import { getCategories } from "../services";
 
 const Header: FC = () => {
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    getCategories().then((newCategories) => {
+      setCategories(newCategories);
+    });
+  });
+
   return (
     <nav className="container mx-auto px-10 mb-8">
       <div className="border-b w-full inline-block border-blue-400 py-8">
@@ -21,9 +23,9 @@ const Header: FC = () => {
           </Link>
         </div>
         <div className="hidden md:float-left md:contents">
-          {demoArry.map((category: DEMO) => {
+          {categories.map((category: any, index: number) => {
             return (
-              <Link key={category.name} href={`/category${category.slug}`}>
+              <Link key={index} href={`/category${category.slug}`}>
                 <span
                   className="md:float-right
                   mt-2
