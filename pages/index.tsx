@@ -3,7 +3,11 @@ import Head from "next/head";
 import { PostCard, PostWidget, Categories } from "../components";
 import { getPost } from "../services";
 
-const Home: NextPage = ({ posts }: any) => {
+interface typeHome {
+  posts: any;
+}
+
+const Home: NextPage<typeHome> = ({ posts }) => {
   return (
     <div className="container mx-auto px-10 mb-8">
       <Head>
